@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Super Mario</title>
+</head>
+<style type="text/css">
+  	body{
+  	 display: inline-block;
+  	 width: 1200px;
+  	 height: 900px; 
+  	 background-image: url('back.png');
+  	 background-repeat: no-repeat;
+     background-size: 100% auto;
+     position: relative;
+     
+  }
+  #myContainer{
+  	width: 1200px;
+  	height: 700px;
+  	/*position: relative;*/
+  }
+	#mario{
+		background-image: url('mario2.gif');
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		top:530px;
+		/*animation: jump ;
+*/	}
+	#mushroom {
+		background-image: url('mushroom.gif');
+		background-repeat: no-repeat;
+		width: 200px;
+		height: 100px;
+		position: absolute;
+		transform: translate(250%,0%);
+		top: 530px;
+
+		/*animation:down 5s ease-in infinite;*/
+		
+	}
+	img {
+		width:200px ;
+		height:100px ;
+	}
+    button {
+      border-radius: 30%;
+      background-color: lightblue;
+    }
+    
+</style>
+<body onload="Move()" onkeypress="key_trigger(event)">
+	<p>
+	<button onclick="jump()">^</button>
+    </p>
+    <audio autoplay loop>
+    	<source src="mario.ogg" type="audio/ogg">
+    	<source src="mario.mp3" type="audio/mp3">
+    </audio>
+    <div id="myContainer">
+    <div id="mario"">
+    </div>
+    <div id="mushroom">
+    </div>
+    </div>
+ <script type="text/javascript">
+ 		function key_trigger(e){
+ 			var x = e.charCode;
+ 			if(x == "32" || x == "13"){
+ 				jump();
+ 			}
+ 		}
+    	function Move() {
+    		var elem = document.getElementById('mario');
+    		var what = document.getElementById('mushroom');
+    		var moveZ = 0;
+    		var moveX = 0;
+    		var moveY = 0;
+    		var time = setInterval(frame,10);
+    		function frame() {
+    			if (moveX==10000) {
+    				clearInterval(time);
+    			}
+    			else { 
+    				moveX++;
+    				elem.style.left = moveX + 'px';
+    				moveY++;
+    				what.style.right = moveY + 'px';
+    			}	
+    		}
+    	}
+    	var elem = document.getElementById('mario');
+    	var move = 0;
+    	var down = 0;
+
+    	function jump(){
+    		// alert('bumm');
+			// elem.style.top = move + '30px';
+			if(move == 10){
+				down += 264;
+				elem.style.top = down + 'px'; //bottom,right,left
+				// elem.style.bottom = move + 'px';
+			}else{
+				 elem.style.bottom = move + 'px';
+				move += 10;
+			}
+
+    	}
+
+
+
+              function Back() {
+    		var element = document.getElementById('mushroom');
+    		var moveF = 0;
+    		var moveB = 0;
+    		var period = setInterval(frame,1);
+    		function frame() {
+    			if (moveF == 1200) {
+    				moveF -- ;
+    				elem.style.right = moveF + 'px';
+    		    
+    			  }
+    			
+    		}
+    	}
+
+    </script>
+</body>
+</html>
